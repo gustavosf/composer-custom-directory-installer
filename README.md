@@ -11,8 +11,10 @@ Installation
 ```
   "require":{
     "php": ">=5.3",
-    "mnsami/composer-custom-directory-installer": "1.0.*",
-    "monolog/monolog": "*"
+    "gustavosf/composer-custom-directory-installer": "1.1.*",
+    "fuel/core": "*",
+    "fuel/email": "*",
+    "fuel/parser": "*"
   }
 ```
 
@@ -21,8 +23,11 @@ Installation
 ```
   "extra":{
     "installer-paths":{
-      "./monolog/": ["monolog/monolog"]
+      "app/core": ["fuel/core"],
+      "app/packages/{$name}": ["fuel/email", "fuel/parser"]
     }
 ```
 
  by adding the `installer-paths` part, you are telling composer to install the `monolog` package inside the `monolog` folder in your root directory.
+
+You can rewrite or customize your destination folder depending on the vendor or the name of the package. For this, just use `{$vendor}` or `{$name}` as placeholders. In the example above, the package `fuel/email` should be installed in the path `./app/packages/email`.

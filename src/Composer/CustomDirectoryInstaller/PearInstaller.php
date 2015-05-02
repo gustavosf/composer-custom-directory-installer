@@ -21,7 +21,15 @@ class PearInstaller extends BasePearInstaller
           foreach($packageNames as $packageName)
           {
             if (in_array(strtolower($packageName), $names)) {
-              return $path;
+              if (preg_match('{(?<vendor>[^/]+)/(?<name>[^/]+)}', $packageName, $match))
+              {
+                return str_replace(
+                  array('{$vendor}','{$name}'),
+                  array($match['vendor'], $match['name']),
+                  $path
+                );
+              }
+              else return $path;
             }
           }
         }
